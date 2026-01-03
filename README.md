@@ -9,9 +9,9 @@ UTS Struktur Data - Stack &amp; Queue Implementation
 
 ---
 
-## 📋 Kompetensi yang Dikerjakan
+##  Kompetensi yang Dikerjakan
 
-### 1. STACK - Game Pertarungan ✅
+### 1. STACK - Game Pertarungan 
 - **Fitur Program**:
   - ATTACK (Damage: 30)
   - DEFENSE (Damage: 5)
@@ -19,7 +19,7 @@ UTS Struktur Data - Stack &amp; Queue Implementation
   - Total Damage Calculator
   - Menu Interaktif
 
-## 🚀 Cara Menjalankan Program
+##  Cara Menjalankan Program
 
 ### Compile & Run
 
@@ -30,7 +30,7 @@ UTS Struktur Data - Stack &amp; Queue Implementation
 
 ---
 
-## 📝 Penjelasan Struktur Program
+##  Penjelasan Struktur Program
 
 ### Struktur Data Stack
 ```cpp
@@ -57,7 +57,7 @@ struct Stack {
 
 ---
 
-## 🎮 Cara Bermain
+##  Cara Bermain
 
 ### Menu Game:
 ```
@@ -90,7 +90,7 @@ Pilih menu: 7 → Total Damage = 30 + 30 + 5 = 65
 
 ---
 
-## 📂 Struktur Repository
+##  Struktur Repository
 ```
 UTS-Struktur-Data-2025/
 │
@@ -102,7 +102,7 @@ UTS-Struktur-Data-2025/
 
 ---
 
-## 💡 Penjelasan Algoritma
+##  Penjelasan Algoritma
 
 ### 1. Prosedur Push
 ```
