@@ -23,21 +23,9 @@ UTS Struktur Data - Stack &amp; Queue Implementation
 
 ### Compile & Run
 
-#### Menggunakan Code::Blocks:
-1. Buka file `stack_game.cpp` di Code::Blocks
-2. Klik menu **Build** → **Build and Run** (atau tekan F9)
-3. Program akan berjalan di terminal
-
----
 
 ##  Penjelasan Struktur Program
 
-### Struktur Data Stack
-```cpp
-struct Stack {
-    string info[2025];  // Array untuk menyimpan aksi
-    int top;            // Penunjuk elemen teratas
-};
 ```
 
 ### Fungsi-Fungsi Utama
@@ -97,7 +85,7 @@ UTS-Struktur-Data-2025/
 ├── README.md                          # Dokumentasi lengkap
 │
 └── implementasi/                      # Implementasi program
-    └── stack_game.cpp                 # Program Stack Game C++
+    └── stack_game
 ```
 
 ---
