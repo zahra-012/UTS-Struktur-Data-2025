@@ -1,0 +1,174 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+const int N_STACK = 2025;
+
+struct Stack {
+    string info[N_STACK];
+    int top;
+};
+
+void create_stack(Stack &S) {
+    S.top = -1;
+}
+
+bool is_emptyy(Stack S) {
+    return S.top == -1;
+}
+
+bool is_full(Stack S) {
+    return S.top == N_STACK - 1;
+}
+
+void push(Stack &S, string x) {
+    if (!is_full(S)) {
+        S.top = S.top + 1;
+        S.info[S.top] = x;
+    }
+}
+
+string pop(Stack &S) {
+    if (is_emptyy(S)) {
+        return "";
+    } else {
+        string hasil = S.info[S.top];
+        S.top = S.top - 1;
+        return hasil;
+    }
+}
+
+void emptyStack(Stack &S) {
+    S.top = -1;
+}
+
+void manageAction(Stack &S_Aksi, Stack &S_Redo, string aksi) {
+    string temp;
+
+    if (aksi == "UNDO") {
+        if (!is_emptyy(S_Aksi)) {
+            temp = pop(S_Aksi);
+            push(S_Redo, temp);
+            cout << "UNDO: " << temp << " dibatalkan" << endl;
+        } else {
+            cout << "Tidak ada aksi untuk di-UNDO" << endl;
+        }
+    } else if (aksi == "REDO") {
+        if (!is_emptyy(S_Redo)) {
+            temp = pop(S_Redo);
+            push(S_Aksi, temp);
+            cout << "REDO: " << temp << " dikembalikan" << endl;
+        } else {
+            cout << "Tidak ada aksi untuk di-REDO" << endl;
+        }
+    } else {
+        push(S_Aksi, aksi);
+        emptyStack(S_Redo);
+        cout << "Aksi " << aksi << " ditambahkan" << endl;
+    }
+}
+
+void totalDamage(Stack &S, int &damage) {
+    string aksi;
+    damage = 0;
+
+    while (!is_emptyy(S)) {
+        aksi = pop(S);
+        if (aksi == "ATTACK") {
+            damage = damage + 30;
+        } else if (aksi == "DEFENSE") {
+            damage = damage + 5;
+        }
+    }
+}
+
+void displayStack(Stack S) {
+    cout << "\n=== ISI STACK AKSI ===" << endl;
+    if (is_emptyy(S)) {
+        cout << "[KOSONG]" << endl;
+    } else {
+        cout << "Top = " << S.top << endl;
+        cout << "[ ";
+        for (int i = 0; i <= S.top; i++) {
+            cout << S.info[i] << " ";
+        }
+        cout << "]" << endl;
+    }
+}
+
+void displayMenu() {
+    cout << "\n========== MENU GAME ==========" << endl;
+    cout << "1. ATTACK (Damage: 30)" << endl;
+    cout << "2. DEFENSE (Damage: 5)" << endl;
+    cout << "3. UNDO" << endl;
+    cout << "4. REDO" << endl;
+    cout << "5. Lihat Stack Aksi" << endl;
+    cout << "6. Lihat Stack Redo" << endl;
+    cout << "7. Hitung Total Damage" << endl;
+    cout << "8. Reset Game" << endl;
+    cout << "0. Keluar" << endl;
+    cout << "===============================" << endl;
+}
+
+int main() {
+    Stack S_Aksi, S_Redo;
+    create_stack(S_Aksi);
+    create_stack(S_Redo);
+
+    int pilihan;
+    string aksi;
+
+    cout << "========================================" << endl;
+    cout << "  GAME PERTARUNGAN - UNDO/REDO SYSTEM  " << endl;
+    cout << "========================================" << endl;
+
+    do {
+        displayMenu();
+        cout << "Pilih menu: ";
+        cin >> pilihan;
+
+        switch(pilihan) {
+            case 1:
+                manageAction(S_Aksi, S_Redo, "ATTACK");
+                break;
+            case 2:
+                manageAction(S_Aksi, S_Redo, "DEFENSE");
+                break;
+            case 3:
+                manageAction(S_Aksi, S_Redo, "UNDO");
+                break;
+            case 4:
+                manageAction(S_Aksi, S_Redo, "REDO");
+                break;
+            case 5:
+                displayStack(S_Aksi);
+                break;
+            case 6:
+                cout << "\n=== ISI STACK REDO ===" << endl;
+                displayStack(S_Redo);
+                break;
+            case 7: {
+                Stack temp_S = S_Aksi;
+                int damage;
+                totalDamage(temp_S, damage);
+                cout << "\n=== TOTAL DAMAGE ===" << endl;
+                cout << "Total Damage: " << damage << endl;
+                cout << "Stack Aksi sekarang kosong (sudah dihitung)" << endl;
+                break;
+            }
+            case 8:
+                emptyStack(S_Aksi);
+                emptyStack(S_Redo);
+                cout << "Game di-reset!" << endl;
+                break;
+            case 0:
+                cout << "\nTerima kasih telah bermain!" << endl;
+                break;
+            default:
+                cout << "Pilihan tidak valid!" << endl;
+        }
+
+    } while(pilihan != 0);
+
+    return 0;
+}
